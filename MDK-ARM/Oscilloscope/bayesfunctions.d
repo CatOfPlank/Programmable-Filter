@@ -1,0 +1,21 @@
+oscilloscope/bayesfunctions.o: \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Source\BayesFunctions\BayesFunctions.c \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Source\BayesFunctions\arm_gaussian_naive_bayes_predict_f32.c \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\dsp\bayes_functions.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_math_types.h \
+  ..\Drivers\CMSIS\Include\cmsis_compiler.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  ..\Drivers\CMSIS\Include\cmsis_armclang.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\string.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\math.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\float.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\limits.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_math_memory.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_math_types.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\dsp\none.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\dsp\utils.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\dsp\statistics_functions.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\dsp\basic_math_functions.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\dsp\fast_math_functions.h

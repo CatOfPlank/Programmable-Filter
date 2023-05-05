@@ -1,0 +1,27 @@
+oscilloscope/commontablesf16.o: \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Source\CommonTables\CommonTablesF16.c \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Source\CommonTables\arm_common_tables_f16.c \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_math_types_f16.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_math_types.h \
+  ..\Drivers\CMSIS\Include\cmsis_compiler.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  ..\Drivers\CMSIS\Include\cmsis_armclang.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\string.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\math.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\float.h \
+  F:\keil\ARM\ARMCLANG\Bin\..\include\limits.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_common_tables_f16.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_math_types_f16.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Source\CommonTables\arm_const_structs_f16.c \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_const_structs_f16.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_common_tables.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\dsp\fast_math_functions.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_math_types.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_math_memory.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\dsp\none.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\dsp\utils.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\arm_common_tables_f16.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Include\dsp\transform_functions_f16.h \
+  F:\keil\ARM\PACK\ARM\CMSIS\5.8.0\CMSIS\DSP\Source\CommonTables\arm_mve_tables_f16.c

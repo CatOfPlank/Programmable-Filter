@@ -1,0 +1,10 @@
+oscilloscope\fft.o: ..\Drivers\fft\src\fft.c
+oscilloscope\fft.o: ../Drivers/fft/inc/FFTInc.h
+oscilloscope\fft.o: F:\keil\ARM\ARMCC\Bin\..\include\math.h
+oscilloscope\fft.o: ../Middlewares/ST/ARM/DSP/Inc/arm_math.h
+oscilloscope\fft.o: ../Drivers/CMSIS/Include/core_cm4.h
+oscilloscope\fft.o: F:\keil\ARM\ARMCC\Bin\..\include\stdint.h
+oscilloscope\fft.o: ../Drivers/CMSIS/Include/cmsis_version.h
+oscilloscope\fft.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+oscilloscope\fft.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+oscilloscope\fft.o: F:\keil\ARM\ARMCC\Bin\..\include\string.h
