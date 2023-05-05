@@ -73,21 +73,21 @@ u8 dataGraph[AD_N],
 
 extern my_Filter my_Filter1;
 
-enum Sample_Rate{  //²ÉÑùÂÊ
+enum Sample_Rate{  //é‡‡æ ·ç‡
 K200 = 200000,K400 = 400000,K800 = 800000,K1000 = 1000000
 
 };
 
-enum Sample_State{ //²ÉÑù×´Ì¬
+enum Sample_State{ //é‡‡æ ·çŠ¶æ€
 OK=1,NO = !OK
 };
 
-u32 ctrl_dac[7] = {265,400,548,690,845,1041,1900};	//¿ØÖÆ·Å´óÆ÷ÔöÒæ
+u32 ctrl_dac[7] = {265,400,548,690,845,1041,1900};	//æ§åˆ¶æ”¾å¤§å™¨å¢ç›Š
 
 float hp_arr[50]=
 {
 0.088,0.176,0.267,0.348,0.440,0.530,0.620,0.710,0.800,0.880,0.990,1.07,1.15,1.25,1.35,1.45,1.55,1.58,1.68,1.80,1.91,1.98,2.03,2.11,2.21,2.30,\
-2.45,2.50,2.65,2.75,2.85,2.95,3.05,3.15,3.25,3.35,3.45,3.55,3.56,3.75,3.85,3.95,4.05,4.15,4.23,4.45,4.55,4.65,4.78,4.88	};  //¸ßÍ¨Êı×é
+2.45,2.50,2.65,2.75,2.85,2.95,3.05,3.15,3.25,3.35,3.45,3.55,3.56,3.75,3.85,3.95,4.05,4.15,4.23,4.45,4.55,4.65,4.78,4.88	};  //é«˜é€šæ•°ç»„
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -96,7 +96,7 @@ void SystemClock_Config(void);
 
 	
 void getAD_allch(float*result){
-	Get_AUTO_RST_Mode_Data((uint16_t*)ad_result,8);  //Á½¸öÍ¨µÀ
+	Get_AUTO_RST_Mode_Data((uint16_t*)ad_result,8);  //ä¸¤ä¸ªé€šé“
 	*result=(ad_result[0]-ADS8688_ZERO)*AD_mV_Scale;
 	result+=AD_N;
 	*result=(ad_result[1]-ADS8688_ZERO)*AD_mV_Scale;
@@ -123,64 +123,64 @@ float get_AD_result(){
 void Sweep_Freq(void)
 {
 	u16 i,times;
-	times=(sweepfreq.end-sweepfreq.start)/sweepfreq.step+1;  //É¨ÆµµãÊı
+	times=(sweepfreq.end-sweepfreq.start)/sweepfreq.step+1;  //æ‰«é¢‘ç‚¹æ•°
 //	Out_freq(0,fre,1000);
 	for(i=0;i<times;i++)  
 	{
-        Out_freq(0,sweepfreq.start+(sweepfreq.step*i),800);  //Êä³ö×î´ó530vpp
-		sweep_points[i] = get_AD_result(); //²ÉÑù
+        Out_freq(0,sweepfreq.start+(sweepfreq.step*i),800);  //è¾“å‡ºæœ€å¤§530vpp
+		sweep_points[i] = get_AD_result(); //é‡‡æ ·
 	//	Wifi_Send(sweep_points[i]);
 	}
 }
 
 
-void ctrl_amplifier() //³Ì¿Ø·Å´óÆ÷	
+void ctrl_amplifier() //ç¨‹æ§æ”¾å¤§å™¨	
 {	
 	HAL_DAC_Start(&hdac,DAC_CHANNEL_1);
 	HAL_DAC_SetValue(&hdac,DAC_CHANNEL_1,DAC_ALIGN_12B_R,ctrl_dac[my_Filter1.amp_dB]);
 
 }
 
-void calSysPara()  //¼ÆËãµçÂ·²ÎÊı
+void calSysPara()  //è®¡ç®—ç”µè·¯å‚æ•°
 {
 	float max_temp,resolu,freq;
 	float funWave,har_2,har_3,har_4,har_5;
 	u32	max_idex;
 	calc_FFT(AD_arr[0],FFT_result[0]);
-	my_Filter1.resolution_fre = my_Filter1.sample_rate / my_Filter1.show_points;  	//¼ÆËã·Ö±æÂÊ
-	arm_max_f32(FFT_result[0],AD_N,&max_temp,&max_idex);  	//ÕÒ×î´óÖµ
+	my_Filter1.resolution_fre = my_Filter1.sample_rate / my_Filter1.show_points;  	//è®¡ç®—åˆ†è¾¨ç‡
+	arm_max_f32(FFT_result[0],AD_N,&max_temp,&max_idex);  	//æ‰¾æœ€å¤§å€¼
 	freq = max_idex *resolu;
-	my_Filter1.cur_fre = freq;		//µ±Ç°ÆµÂÊ
-	funWave = FFT_result[0][max_idex];		//»ù²¨
-	har_2 = pow((double)FFT_result[0][max_idex * 2],2); 	//¶ş´ÎĞ³²¨
-	har_3 = pow((double)FFT_result[0][max_idex * 3],2); 	//Èı´ÎĞ³²¨
-	har_4 = pow((double)FFT_result[0][max_idex * 4],2); 	//ËÄ´ÎĞ³²¨
-	har_5 = pow((double)FFT_result[0][max_idex * 5],2); 	//Îå´ÎĞ³²¨
+	my_Filter1.cur_fre = freq;		//å½“å‰é¢‘ç‡
+	funWave = FFT_result[0][max_idex];		//åŸºæ³¢
+	har_2 = pow((double)FFT_result[0][max_idex * 2],2); 	//äºŒæ¬¡è°æ³¢
+	har_3 = pow((double)FFT_result[0][max_idex * 3],2); 	//ä¸‰æ¬¡è°æ³¢
+	har_4 = pow((double)FFT_result[0][max_idex * 4],2); 	//å››æ¬¡è°æ³¢
+	har_5 = pow((double)FFT_result[0][max_idex * 5],2); 	//äº”æ¬¡è°æ³¢
 	my_Filter1.THD = sqrt(har_2+har_3+har_4+har_5) / funWave;
 	
 }
 void Filter_Init(void)
 {
 	my_Filter1.Mode = Normal;
-	my_Filter1.sample_rate = K200;  	//³õÊ¼²ÉÑùÂÊ200k
-	my_Filter1.cur_fre = 0; 		//»ñÈ¡µ½µÄµ±Ç°ÆµÂÊ
-	my_Filter1.show_points = AD_N;  	//³õÊ¼µãÊı
-	my_Filter1.cutoff_fre = 1000;  	//³õÊ¼½ØÖ¹ÆµÂÊ1k
-	my_Filter1.filterKind = LP;  	//ÂË²¨Æ÷ÀàĞÍÄ¬ÈÏµÍÍ¨
-	my_Filter1.THD = 0; 	//×ÜĞ³²¨Ê§Õæ³õÊ¼Îª0
-	sweepfreq.start = 100;  	//É¨Æµ¿ªÊ¼Îª1000Hz
-	sweepfreq.end = 200100;  	//É¨Æµ½áÊø200100
-	sweepfreq.step = 10000;		//²½½ø2k
-	sweepfreq.time = 100;		//Ã¿¸öµã³ÖĞøÊ±¼ä
+	my_Filter1.sample_rate = K200;  	//åˆå§‹é‡‡æ ·ç‡200k
+	my_Filter1.cur_fre = 0; 		//è·å–åˆ°çš„å½“å‰é¢‘ç‡
+	my_Filter1.show_points = AD_N;  	//åˆå§‹ç‚¹æ•°
+	my_Filter1.cutoff_fre = 1000;  	//åˆå§‹æˆªæ­¢é¢‘ç‡1k
+	my_Filter1.filterKind = LP;  	//æ»¤æ³¢å™¨ç±»å‹é»˜è®¤ä½é€š
+	my_Filter1.THD = 0; 	//æ€»è°æ³¢å¤±çœŸåˆå§‹ä¸º0
+	sweepfreq.start = 100;  	//æ‰«é¢‘å¼€å§‹ä¸º1000Hz
+	sweepfreq.end = 200100;  	//æ‰«é¢‘ç»“æŸ200100
+	sweepfreq.step = 10000;		//æ­¥è¿›10k
+	sweepfreq.time = 100;		//æ¯ä¸ªç‚¹æŒç»­æ—¶é—´
 	GraphChannelDataClear(1,3,0);
 }
 
 
 
-void setCutoff() 		//ÇĞ»»½ØÖ¹ÆµÂÊ
+void setCutoff() 		//åˆ‡æ¢æˆªæ­¢é¢‘ç‡
 {	
 	if(my_Filter1.filterKind == LP)
-		Out_freq(1, my_Filter1.cutoff_fre * 115,500);		//Êä³öÊ±ÖÓ
+		Out_freq(1, my_Filter1.cutoff_fre * 115,500);		//è¾“å‡ºæ—¶é’Ÿ
 	else if(my_Filter1.filterKind == HP &&my_Filter1.cutoff_fre/1000 <= 50)
 		Out_freq(1, hp_arr[my_Filter1.cutoff_fre/1000 - 1]* 1000000,500);//hp_arr[my_Filter1.cutoff_fre/1000 - 1]
 } 
@@ -192,7 +192,7 @@ void showGraph()
 	u32 useless;
 	arm_max_f32(sweep_points,sweep_N,&max,&useless);
 	if(max<1)max = 1;
-	arm_scale_f32(sweep_points, 255.0f/max,sweep_points,sweep_N);//¹éÒ»»¯
+	arm_scale_f32(sweep_points, 255.0f/max,sweep_points,sweep_N);//å½’ä¸€åŒ–
 	pDataGraph = dataGraph; pAD_arr = sweep_points;
 	
 	for(int i=0;i<sweep_N;i++)
@@ -207,41 +207,41 @@ void showGraph()
 
 }
 
-void Signal_or_Sweep()  //¿ª¹Ø1ÇĞ»»ĞÅºÅÔ´ºÍÉ¨Æµ£¬µÍµçÆ½ÓĞĞ§
+void Signal_or_Sweep()  //å¼€å…³1åˆ‡æ¢ä¿¡å·æºå’Œæ‰«é¢‘ï¼Œä½ç”µå¹³æœ‰æ•ˆ
 {
 	if(my_Filter1.Mode == Sweep)
-		HAL_GPIO_WritePin(Switch_1_GPIO_Port,Switch_1_Pin,GPIO_PIN_SET) ; //¸ßµçÆ½ÇĞ»»9959£¬É¨Æµ
+		HAL_GPIO_WritePin(Switch_1_GPIO_Port,Switch_1_Pin,GPIO_PIN_SET) ; //é«˜ç”µå¹³åˆ‡æ¢9959ï¼Œæ‰«é¢‘
 	else 
 		HAL_GPIO_WritePin(Switch_1_GPIO_Port,Switch_1_Pin,GPIO_PIN_RESET) ; 
 }
 
-void Test_or_Next() //¿ª¹Ø2Ä¬ÈÏ²âÊÔ£¬¸ßµçÆ½½Óµ½ºó¼¶µçÂ·
+void Test_or_Next() //å¼€å…³2é»˜è®¤æµ‹è¯•ï¼Œé«˜ç”µå¹³æ¥åˆ°åçº§ç”µè·¯
 {
 	if(my_Filter1.filterKind != Amp)
-		HAL_GPIO_WritePin(Switch_2_GPIO_Port,Switch_2_Pin,GPIO_PIN_SET) ; //¸ßµçÆ½ÇĞ»»µ½ºó¼¶
+		HAL_GPIO_WritePin(Switch_2_GPIO_Port,Switch_2_Pin,GPIO_PIN_SET) ; //é«˜ç”µå¹³åˆ‡æ¢åˆ°åçº§
 	else
 		HAL_GPIO_WritePin(Switch_2_GPIO_Port,Switch_2_Pin,GPIO_PIN_RESET) ; 
 }
 
-void setFilterMode() //¿ª¹Ø3ÇĞ»»ÂË²¨ÀàĞÍ£¬ÍÖÔ²or¸ßµÍÍ¨£¬¸ßµçÆ½´¥·¢
+void setFilterMode() //å¼€å…³3åˆ‡æ¢æ»¤æ³¢ç±»å‹ï¼Œæ¤­åœ†oré«˜ä½é€šï¼Œé«˜ç”µå¹³è§¦å‘
 {
 	if(my_Filter1.filterKind == HP || my_Filter1.filterKind == LP)
-		HAL_GPIO_WritePin(Switch_3_GPIO_Port,Switch_3_Pin,GPIO_PIN_SET) ; //µÍµçÆ½»»µ½¸ßµÍÍ¨Ä£Ê½
-	else if(my_Filter1.filterKind ==ELL) //ÍÖÔ²
+		HAL_GPIO_WritePin(Switch_3_GPIO_Port,Switch_3_Pin,GPIO_PIN_SET) ; //ä½ç”µå¹³æ¢åˆ°é«˜ä½é€šæ¨¡å¼
+	else if(my_Filter1.filterKind ==ELL) //æ¤­åœ†
 		HAL_GPIO_WritePin(Switch_3_GPIO_Port,Switch_3_Pin,GPIO_PIN_RESET);
 		
 }
 
-void Lp_or_Hp()		//¿ª¹Ø4ÇĞ»»¸ßÍ¨»òµÍÍ¨£¬Ä¬ÈÏµÍµçÆ½¸ßÍ¨
+void Lp_or_Hp()		//å¼€å…³4åˆ‡æ¢é«˜é€šæˆ–ä½é€šï¼Œé»˜è®¤ä½ç”µå¹³é«˜é€š
 {
 	if(my_Filter1.filterKind == LP)
-		HAL_GPIO_WritePin(Switch_4_GPIO_Port,Switch_4_Pin,GPIO_PIN_SET) ; //¸ßµçÆ½ÇĞ»»µ½µÍÍ¨
+		HAL_GPIO_WritePin(Switch_4_GPIO_Port,Switch_4_Pin,GPIO_PIN_SET) ; //é«˜ç”µå¹³åˆ‡æ¢åˆ°ä½é€š
 	else if(my_Filter1.filterKind == HP)
-		HAL_GPIO_WritePin(Switch_4_GPIO_Port,Switch_4_Pin,GPIO_PIN_RESET) ; //¸ßµçÆ½ÇĞ»»µ½ºó¼¶
+		HAL_GPIO_WritePin(Switch_4_GPIO_Port,Switch_4_Pin,GPIO_PIN_RESET) ; //é«˜ç”µå¹³åˆ‡æ¢åˆ°åçº§
 
 }
 
-void Out_LpHp_or_epl() //¿ª¹Ø5ÇĞ»»Êä³öÀàĞÍ£¬¸ßµçÆ½ÎªÍÖÔ²ÂË²¨Æ÷Êä³ö
+void Out_LpHp_or_epl() //å¼€å…³5åˆ‡æ¢è¾“å‡ºç±»å‹ï¼Œé«˜ç”µå¹³ä¸ºæ¤­åœ†æ»¤æ³¢å™¨è¾“å‡º
 {
 	if(my_Filter1.filterKind == ELL)
 		HAL_GPIO_WritePin(Switch_5_GPIO_Port,Switch_5_Pin,GPIO_PIN_SET) ;
@@ -249,7 +249,7 @@ void Out_LpHp_or_epl() //¿ª¹Ø5ÇĞ»»Êä³öÀàĞÍ£¬¸ßµçÆ½ÎªÍÖÔ²ÂË²¨Æ÷Êä³ö
 		HAL_GPIO_WritePin(Switch_5_GPIO_Port,Switch_5_Pin,GPIO_PIN_RESET) ;
 
 }
-void softReset()  //Èí¼ş¸´Î»
+void softReset()  //è½¯ä»¶å¤ä½
 {
 		HAL_NVIC_SystemReset();
 }
@@ -296,11 +296,11 @@ int main(void)
   MX_DAC_Init();
   /* USER CODE BEGIN 2 */
   delay_init(168);
-  Init_AD9959();		//9959³õÊ¼»¯
+  Init_AD9959();		//9959åˆå§‹åŒ–
   ADS8688_Init_Mult();
-  Filter_Init();    //²ÎÊı³õÊ¼»¯
-  TFT_Init();		//´ó²ÊÆÁ³õÊ¼»¯
-//	Wifi_Connect();	//wifi³õÊ¼»¯
+  Filter_Init();    //å‚æ•°åˆå§‹åŒ–
+  TFT_Init();		//å¤§å½©å±åˆå§‹åŒ–
+//	Wifi_Connect();	//wifiåˆå§‹åŒ–
 	bee();
   /* USER CODE END 2 */
 
@@ -314,34 +314,34 @@ while (1)
     /* USER CODE BEGIN 3 */
 	  switch(my_Filter1.Mode)
 	  {  
-		  case Normal:  	//·Å´ó/ÂË²¨Ä£Ê½
+		  case Normal:  	//æ”¾å¤§/æ»¤æ³¢æ¨¡å¼
 		  {
-			  if(my_Filter1.filterKind == Amp) 		//·Å´óÄ£Ê½
+			  if(my_Filter1.filterKind == Amp) 		//æ”¾å¤§æ¨¡å¼
 			  { 
 				    ctrl_amplifier();
-					Signal_or_Sweep();		//¿ª¹Ø1
-					Test_or_Next();  		//¿ª¹Ø2
+					Signal_or_Sweep();		//å¼€å…³1
+					Test_or_Next();  		//å¼€å…³2
 			  }
-			  else  			//ÂË²¨
+			  else  			//æ»¤æ³¢
 			  {
 					setCutoff(); 
-					Signal_or_Sweep();		//¿ª¹Ø1
-					Test_or_Next();  		//¿ª¹Ø2
-					setFilterMode();  		//¿ª¹Ø3
-					Lp_or_Hp(); 			//¿ª¹Ø4
-					Out_LpHp_or_epl();		//¿ª¹Ø5
+					Signal_or_Sweep();		//å¼€å…³1
+					Test_or_Next();  		//å¼€å…³2
+					setFilterMode();  		//å¼€å…³3
+					Lp_or_Hp(); 			//å¼€å…³4
+					Out_LpHp_or_epl();		//å¼€å…³5
 				  }
 			  
 		   }break;
-		  case Sweep:		//É¨Æµ
+		  case Sweep:		//æ‰«é¢‘
 		  {
-					Signal_or_Sweep();		//¿ª¹Ø1
-					Test_or_Next();  		//¿ª¹Ø2
-					setFilterMode();  		//¿ª¹Ø3
-					Lp_or_Hp(); 			//¿ª¹Ø4
-					Out_LpHp_or_epl();		//¿ª¹Ø5
-			  		Sweep_Freq();			//É¨ÆµÊä³ö
-					showGraph();			//»æÖÆÇúÏß
+					Signal_or_Sweep();		//å¼€å…³1
+					Test_or_Next();  		//å¼€å…³2
+					setFilterMode();  		//å¼€å…³3
+					Lp_or_Hp(); 			//å¼€å…³4
+					Out_LpHp_or_epl();		//å¼€å…³5
+			  		Sweep_Freq();			//æ‰«é¢‘è¾“å‡º
+					showGraph();			//ç»˜åˆ¶æ›²çº¿
 			//GraphChannelDataAdd(2,3,0,test,21);
 			}break; 	 
 		  case sysReset:
