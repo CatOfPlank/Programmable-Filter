@@ -168,7 +168,7 @@ void Filter_Init(void)
 	my_Filter1.cutoff_fre = 1000;  	//初始截止频率1k
 	my_Filter1.filterKind = LP;  	//滤波器类型默认低通
 	my_Filter1.THD = 0; 	//总谐波失真初始为0
-	sweepfreq.start = 100;  	//扫频开始为1000Hz
+	sweepfreq.start = 100;  	//扫频开始为100Hz
 	sweepfreq.end = 200100;  	//扫频结束200100
 	sweepfreq.step = 10000;		//步进10k
 	sweepfreq.time = 100;		//每个点持续时间
